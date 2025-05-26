@@ -23,6 +23,7 @@ router.get('/callback', async (req, res) => {
     });
 
     const accessToken = tokenRes.data.access_token;
+    
 
     // Store the token in session or cookie
     req.session.accessToken = accessToken;
@@ -37,7 +38,7 @@ router.get('/callback', async (req, res) => {
 
 router.get('/me', async (req, res) => {
     const accessToken = req.session.accessToken;
-    if (!accessToken) return res.redirect('/');
+    if (!accessToken) return res.redirect('/?utm=oautherror');
     try {
     const userRes = await axios.get('https://hydraulisc.net/oauth/userinfo', {
       headers: {
@@ -47,12 +48,16 @@ router.get('/me', async (req, res) => {
 
     const user = userRes.data;
 
-    res.send(`
-      <h1>Welcome, ${user.username}!</h1>
-      <p>Email: ${user.email}</p>
-      <pre>${JSON.stringify(user, null, 2)}</pre>
-      <a href="/logout">Logout</a>
-    `);
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+      language: user.language || "english",
+      pfp: user.pfp,
+      discriminator: user.discriminator
+    };
+
+    res.status(200).redirect('/?utm_src=oauth');
+
   } catch (err) {
     console.error('User info fetch failed:', err.response?.data || err.message);
     res.status(500).send('Failed to fetch user info.');

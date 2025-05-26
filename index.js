@@ -25,7 +25,7 @@ const initializeDatabase = () => {
                 biography TEXT NOT NULL,
                 isAdmin BOOLEAN DEFAULT 0 NOT NULL,
                 indexable BOOLEAN DEFAULT 1 NOT NULL,
-                discriminator TEXT NOT NULL,
+                discriminator TEXT,
                 language TEXT NOT NULL
             )
         `);
@@ -102,8 +102,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', async (req, res) => {
     try {
         res.render('pages/index', {
-            username: null,
-            uid: null,
+            username: req.session.user?.username || null,
+            uid: req.session.user?.id || null,
             title: globals.title,
             logoURL: globals.logoURL,
             bannerURL: globals.bannerURL,

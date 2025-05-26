@@ -27,12 +27,18 @@
                 </li>
             </ul>
             <ul class="nav_auth_actions">
-                <li class="nav_item">
-                    <a href="/login" title="Login" class="nav_link">Login</a>
-                </li>
-                <li class="nav_item">
-                    <a href="/register" title="Register" class="nav_link">Register</a>
-                </li>
+                <% if(username) { %>
+                    <li class="nav_item">
+                        <a href="/user/<%- uid %>" class="nav_username"><%- username %></a>
+                    </li>
+                <% } else { %>
+                    <li class="nav_item">
+                        <a href="/login" title="Login" class="nav_link">Login</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="/register" title="Register" class="nav_link">Register</a>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </nav>

@@ -75,6 +75,14 @@ img {
     color: #d7d9e0;
 }
 
+.nav_username {
+    color: #ffd05a;
+}
+
+.nav_username:hover {
+    color: yellow;
+}
+
 @media (min-width: 768px) {
     .navbar {
         flex-wrap: nowrap;

@@ -6,7 +6,7 @@
 ### What's Here?
 This is the source code for StarPlace.
 
-The code is designed for the Node.JS environment (Ideally `express-js` with `nodemon` for live refresh options. Additional packages vary. Refer to documentation for more information).
+The code is designed for the Node.JS environment (Ideally `express-js` with `nodemon` for live refresh options. Additional packages vary. Refer to [documentation](https://about.hydraulisc.net/docs/starplace) for more information).
 
 ### What is StarPlace?
 StarPlace is a Free and Open Source, forum-style social network, where users share content in exchange of "Stars", by [Hydraulisc](https://about.hydraulisc.net).
