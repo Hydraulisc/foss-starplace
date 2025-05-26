@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | StarPlace</title>
+    <meta property="og:title" content="Register Page - StarPlace">
+    <meta property="og:description" content="Unleashing Stellar Creativity - StarPlace | Log in or Sign up to continue">
+    <meta property="og:image" content="/icons/StarPlace-Logo-1.png">
+    <link rel="canonical" href="https://about:blank">
+    <link rel="alternate" media="handheld" href="https://about:blank">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://about:blank">
+    <link rel="icon" type="image/png" href="/icons/StarPlace-Logo-1.png">
+    <meta name="description" content="Unleash your Stellar Creativity, with StarPlace - where communities come together!">
+    <meta property="og:site_name" content="Unleashing Stellar Creativity - StarPlace">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="/css/authStyles.css">
+    <link rel="stylesheet" href="/css/indexStyles.css">
+</head>
+<body>
+    <%- include('../partials/noscript') %>
+    <div id="root">
+        <div class="registerContainer">
+            <div class="registerPage">
+                <div class="register">
+                    <div class="dynamicRegister">
+                        <div class="login" style="width: 440px; min-height: auto;">
+                            <div class="bannerDisplay">
+                                <img src="<%- logoURL %>" style="width: 25%; height: auto; border-radius: 14px 14px 0 0;">
+                            </div>
+                            <div class="title">register on <%- title %></div>
+                            <div class="subtitle">Join an ever growing community of every interest, Star vines from 2015, and <b>more for free, forever</b>.</div>
+                            <div class="authswitch">Already have an account? <a style="color: inherit;" href="/login">Login</a>.</div>
+                            <div>
+                                <form action="/auth/register" method="post" id="register-form">
+                                    <div class="formItemContainer">
+                                        <input class="formInput" type="text" name="username" placeholder="Username">
+                                    </div>
+                                    <div class="formItemContainer">
+                                        <input class="formInput" type="password" name="password" placeholder="Password" autocomplete="off">
+                                    </div>
+                                    <div class="formItemContainer">
+                                        <button class="formButton" type="submit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="formItemContainer">
+                                <div class="authswitch" style="text-align: left !important;">By signing up, you agree to our <a href="" style="color: inherit;">Terms of Service</a>, <a href="" style="color: inherit;">Privacy Policy</a> and <a href="" style="color: inherit;">Community Guidelines</a>.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="registerPageDemoContainer">
+                <div class="registerPageDemo">
+                    <div class="app">
+                        <div tabindex="-1">
+                            <div class="home_container">
+                                <div class="row">
+                                    <main class="starboards_container" style="width: 100% !important;">
+                                        <div class="main_content_wrapper">
+                                            <div>
+                                                <div class="content_navigation_container row">
+                                                    <div class="content_nav">
+                                                        <div class="content_navigations" role="group">
+                                                            <input class="content_nav_btn" id="input-landing-posts-all" type="radio">
+                                                            <label for="input-landing-posts-all" class="content_nav_btn_label" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;">Starred</label>
+                                                            <input class="content_nav_btn active" id="input-landing-posts-subbed" type="radio" checked>
+                                                            <label for="input-landing-posts-subbed" class="content_nav_btn_label active" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;">All</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div class="starpost_listing">
+                                                        <div class="starpost_content_container">
+                                                            <article class="row">
+                                                                <div class="starpost_rating">
+                                                                    <div class="votebar" title="0 Stars - 0 Unstars">
+                                                                        <button style="background: transparent; border: none;">
+                                                                            <svg width="16px" height="16px" viewBox="0 0 24 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                <g id="SVGRepo_iconCarrier">
+                                                                                    <path d="M18.2929 15.2893C18.6834 14.8988 18.6834 14.2656 18.2929 13.8751L13.4007 8.98766C12.6195 8.20726 11.3537 8.20757 10.5729 8.98835L5.68257 13.8787C5.29205 14.2692 5.29205 14.9024 5.68257 15.2929C6.0731 15.6835 6.70626 15.6835 7.09679 15.2929L11.2824 11.1073C11.673 10.7168 12.3061 10.7168 12.6966 11.1073L16.8787 15.2893C17.2692 15.6798 17.9024 15.6798 18.2929 15.2893Z" fill="#d7d9e0cd"></path>
+                                                                                </g>
+                                                                            </svg>
+                                                                        </button>
+                                                                        <div>955</div>
+                                                                        <button style="background: transparent; border: none;">
+                                                                            <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                <g id="SVGRepo_iconCarrier">
+                                                                                    <path d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z" fill="#d7d9e0cd"></path>
+                                                                                </g>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="starpost_content">
+                                                                    <div class="row">
+                                                                        <div class="starpost_image_preview">
+                                                                            <div>
+                                                                                <button class="starpost_image_thumbnail">
+                                                                                    <img src="/icons/image-broken.png" class="image_thumbnail">
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="starpost_content_text">
+                                                                            <div class="starpost_title">
+                                                                                <h1>
+                                                                                    <span style="color: white;">2015 was the year the ducks broke free.</span></h1>
+                                                                            </div>
+                                                                            <div class="starpost_details">
+                                                                                <span style="color: lightcoral;">StarPlace Devs</span>
+                                                                                    to 
+                                                                                <span style="color: lightcoral;">StarPlace Demo</span>
+                                                                                    ·
+                                                                                <span>A Long Time Ago</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                    </div>
+                                                    <hr style="opacity: 0.2;">
+                                                    <div class="starpost_listing">
+                                                        <div class="starpost_content_container">
+                                                            <article class="row">
+                                                                <div class="starpost_rating">
+                                                                    <div class="votebar" title="0 Stars - 0 Unstars">
+                                                                        <button style="background: transparent; border: none;">
+                                                                            <svg width="16px" height="16px" viewBox="0 0 24 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                <g id="SVGRepo_iconCarrier">
+                                                                                    <path d="M18.2929 15.2893C18.6834 14.8988 18.6834 14.2656 18.2929 13.8751L13.4007 8.98766C12.6195 8.20726 11.3537 8.20757 10.5729 8.98835L5.68257 13.8787C5.29205 14.2692 5.29205 14.9024 5.68257 15.2929C6.0731 15.6835 6.70626 15.6835 7.09679 15.2929L11.2824 11.1073C11.673 10.7168 12.3061 10.7168 12.6966 11.1073L16.8787 15.2893C17.2692 15.6798 17.9024 15.6798 18.2929 15.2893Z" fill="#d7d9e0cd"></path>
+                                                                                </g>
+                                                                            </svg>
+                                                                        </button>
+                                                                        <div>445</div>
+                                                                        <button style="background: transparent; border: none;">
+                                                                            <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                <g id="SVGRepo_iconCarrier">
+                                                                                    <path d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z" fill="#d7d9e0cd"></path>
+                                                                                </g>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="starpost_content">
+                                                                    <div class="row">
+                                                                        <div class="starpost_image_preview">
+                                                                            <div>
+                                                                                <button class="starpost_image_thumbnail">
+                                                                                    <img src="/icons/image-broken.png" class="image_thumbnail">
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="starpost_content_text">
+                                                                            <div class="starpost_title">
+                                                                                <h1>
+                                                                                    <span style="color: white;">We learned Vine needs to get it together.</span></h1>
+                                                                            </div>
+                                                                            <div class="starpost_details">
+                                                                                <span style="color: lightcoral;">hbleeezy</span>
+                                                                                    to 
+                                                                                <span style="color: lightcoral;">StarPlace Demo</span>
+                                                                                    ·
+                                                                                <span>Sep 10, 2015</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                    </div>
+                                                    <hr style="opacity: 0.2;">
+                                                    <div class="starpost_listing">
+                                                        <div class="starpost_content_container">
+                                                            <article class="row">
+                                                                <div class="starpost_rating">
+                                                                    <div class="votebar" title="0 Stars - 0 Unstars">
+                                                                        <button style="background: transparent; border: none;">
+                                                                            <svg width="16px" height="16px" viewBox="0 0 24 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                <g id="SVGRepo_iconCarrier">
+                                                                                    <path d="M18.2929 15.2893C18.6834 14.8988 18.6834 14.2656 18.2929 13.8751L13.4007 8.98766C12.6195 8.20726 11.3537 8.20757 10.5729 8.98835L5.68257 13.8787C5.29205 14.2692 5.29205 14.9024 5.68257 15.2929C6.0731 15.6835 6.70626 15.6835 7.09679 15.2929L11.2824 11.1073C11.673 10.7168 12.3061 10.7168 12.6966 11.1073L16.8787 15.2893C17.2692 15.6798 17.9024 15.6798 18.2929 15.2893Z" fill="#d7d9e0cd"></path>
+                                                                                </g>
+                                                                            </svg>
+                                                                        </button>
+                                                                        <div>310</div>
+                                                                        <button style="background: transparent; border: none;">
+                                                                            <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                <g id="SVGRepo_iconCarrier">
+                                                                                    <path d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z" fill="#d7d9e0cd"></path>
+                                                                                </g>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="starpost_content">
+                                                                    <div class="row">
+                                                                        <div class="starpost_image_preview">
+                                                                            <div>
+                                                                                <button class="starpost_image_thumbnail">
+                                                                                    <img src="/icons/image-broken.png" class="image_thumbnail">
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="starpost_content_text">
+                                                                            <div class="starpost_title">
+                                                                                <h1>
+                                                                                    <span style="color: white;">And DJ Khaled's adorable pronunciation became our new fave.</span></h1>
+                                                                            </div>
+                                                                            <div class="starpost_details">
+                                                                                <span style="color: #8086d4;">DOPEITSTOM#0001</span>
+                                                                                    to 
+                                                                                <span style="color: lightcoral;">StarPlace Demo</span>
+                                                                                    ·
+                                                                                <span>Oct 23, 2015</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                    </div>
+                                                    <hr style="opacity: 0.2;">
+                                                </div>
+                                            </div>
+                                    </main>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

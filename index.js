@@ -1,0 +1,160 @@
+const express = require('express');
+const session = require('express-session');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const { version } = require('./package.json');
+const legalRoutes = require('./routes/legal');
+const fs = require('fs');
+const globals = JSON.parse(fs.readFileSync('global-variables.json', 'utf8'));
+const cookieParser = require('cookie-parser');
+
+const app = express();
+const db = new sqlite3.Database('./database.db');
+
+// Function to initialize the database and create tables if they don't exist
+const initializeDatabase = () => {
+    db.serialize(() => {
+        // Create Users table
+        db.run(`
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                username TEXT NOT NULL,
+                password TEXT NOT NULL,
+                pfp TEXT NOT NULL,
+                theme TEXT NOT NULL,
+                biography TEXT NOT NULL,
+                isAdmin BOOLEAN DEFAULT 0 NOT NULL,
+                indexable BOOLEAN DEFAULT 1 NOT NULL,
+                discriminator TEXT NOT NULL,
+                language TEXT NOT NULL
+            )
+        `);
+
+        // Create Invites table
+        db.run(`
+            CREATE TABLE IF NOT EXISTS invites (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                code TEXT NOT NULL UNIQUE,
+                used INTEGER DEFAULT 0
+            )
+        `);
+
+        // Create Posts table
+        // Ty sooox for helping with post db - @SleepingAmi
+        db.run(`
+            CREATE TABLE IF NOT EXISTS posts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                title TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                filename TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id)
+                    ON DELETE CASCADE
+                    ON UPDATE CASCADE
+            )
+        `);
+
+        // Enable foreign key support
+        db.run('PRAGMA foreign_keys = ON');
+        console.log('Database initialized with required tables.');
+    });
+};
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Session configuration
+app.use(session({
+    secret: globals.sessionKey,
+    resave: true,
+    saveUninitialized: false,
+    name: 'connect.sid',
+    cookie: {
+        secure: false,                  // Set to true if you use a valid SSL certificate for HTTPS
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,    // 24 hours
+        path: '/',
+        sameSite: 'lax'                 // Added for security
+    },
+    rolling: true                       // Refresh session with each request
+}));
+app.use(cookieParser());
+
+// Dynamic Routes
+const middlewarePath = path.join(__dirname, 'routes');
+fs.readdirSync(middlewarePath).forEach(file => {
+    if (file.endsWith('.js')) {
+        const route = '/' + path.basename(file, '.js'); // filename without .js
+        const middleware = require(path.join(middlewarePath, file));
+  
+        app.use(route, middleware);
+        console.log(`Mounted middleware at ${route} from ${file}`);
+    }
+});
+
+// Static files and views
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Landing
+app.get('/', async (req, res) => {
+    try {
+        res.render('pages/index', {
+            username: null,
+            uid: null,
+            title: globals.title,
+            logoURL: globals.logoURL,
+            bannerURL: globals.bannerURL,
+            shortDescription: globals.shortDescription,
+            kofiURL: globals.kofiURL,
+            posts: []
+        })
+    } catch(err) {
+        res.render('pages/404')
+    }
+})
+
+// Onboarding
+app.get('/welcome', (req, res) => {
+    res.render('pages/welcome', {
+        version,
+        username: null,
+        uid: null,
+        title: globals.title,
+        logoURL: globals.logoURL,
+        kofiURL: globals.kofiURL
+    })
+})
+
+// Login
+app.get('/login', (req, res) => {
+    res.render('pages/login', {
+        username: null,
+        uid: null,
+        title: globals.title,
+        logoURL: globals.logoURL,
+        bannerURL: globals.bannerURL,
+        hydrauliscAuth: globals.hydrauliscAuth,
+        hydrauliscAuthToken: globals.hydrauliscAuthToken
+    })
+})
+
+// Register
+app.get('/register', (req, res) => {
+    res.render('pages/register', {
+        username: null,
+        uid: null,
+        title: globals.title,
+        logoURL: globals.logoURL,
+        bannerURL: globals.bannerURL
+    })
+})
+
+// Start server
+const PORT = globals.hostPort || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+    initializeDatabase(); // Initialize the database when the server starts
+});

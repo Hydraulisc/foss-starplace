@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | StarPlace</title>
+    <meta property="og:title" content="Login Page - StarPlace">
+    <meta property="og:description" content="Unleashing Stellar Creativity - StarPlace | Log in or Sign up to continue">
+    <meta property="og:image" content="/icons/StarPlace-Logo-1.png">
+    <link rel="canonical" href="https://about:blank">
+    <link rel="alternate" media="handheld" href="https://about:blank">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://about:blank">
+    <link rel="icon" type="image/png" href="/icons/StarPlace-Logo-1.png">
+    <meta name="description" content="Unleash your Stellar Creativity, with StarPlace - where communities come together!">
+    <meta property="og:site_name" content="Unleashing Stellar Creativity - StarPlace">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="/css/authStyles.css">
+</head>
+<body>
+    <%- include('../partials/noscript') %>
+    <div id="root">
+        <div class="loginContainer">
+            <div class="dynamicLogin">
+                <div class="login">
+                    <div class="bannerDisplay">
+                        <img src="<%- bannerURL %>" style="width: 400px; height: auto; border-radius: 14px 14px 0 0;">
+                    </div>
+                    <div class="title">welcome back</div>
+                    <div class="authswitch">New to StarPlace? <a style="color: inherit;" href="/register">Register</a>.</div>
+                    <div>
+                        <form action="/auth/login" method="post" id="login-form">
+                            <div class="formItemContainer">
+                                <input class="formInput" type="text" name="username" placeholder="Username">
+                            </div>
+                            <div class="formItemContainer">
+                                <input class="formInput" type="password" name="password" placeholder="Password" autocomplete="off">
+                            </div>
+                            <div class="formItemContainer">
+                                <button class="formButton" type="submit">Login</button>
+                            </div>
+                            
+                            <div class="formItemContainer" style="display: none !important;">
+                                <button>Forgot Password?</button>
+                            </div>
+                        </form>
+                        <% if (hydrauliscAuth && hydrauliscAuthToken) { %>
+                            <form action="/oauth/login">
+                                <div class="formItemContainer">
+                                    <button class="formButton" style="background-color: #8086d4 !important; color: #000000 !important; border: none; border-radius: 4px;">Login with Hydraulisc</button>
+                                </div>
+                            </form>
+                        <% } %>
+                    </div>
+                    <div class="formItemContainer">
+                        <div class="authswitch" style="text-align: left !important;">The <a href="">Terms of Service</a>, <a href="">Privacy Policy</a> and <a href="">Community Guidelines</a> apply.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

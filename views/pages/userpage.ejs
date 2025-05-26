@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unleashing Stellar Creativity | StarPlace</title>
+    <meta property="og:title" content="Unleashing Stellar Creativity - StarPlace">
+    <meta property="og:description" content="Unleashing Stellar Creativity | StarPlace">
+    <meta property="og:image" content="/icons/StarPlace-Logo-1.png">
+    <link rel="canonical" href="https://about:blank">
+    <link rel="alternate" media="handheld" href="https://about:blank">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://about:blank">
+    <link rel="icon" type="image/png" href="/icons/StarPlace-Logo-1.png">
+    <meta name="description" content="Unleash your Stellar Creativity, with StarPlace - where communities come together!">
+    <meta property="og:site_name" content="Unleashing Stellar Creativity - StarPlace">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/cookies') %>
+    <%- include('../partials/header', { username: username }) %>
+
+    <div style="margin: 0 0 62px;">
+        <div class="profileBody">
+            <div style="display: block;">
+                <div style="padding-top: 60px; padding-bottom: 0; padding-right: 0; padding-left: 0; margin-top: 0; margin-bottom: 24px; margin-right: 0; margin-left: 0;">
+                    <div style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; margin-top: 0; margin-bottom: 40px; margin-right: 16px; margin-left: 16px;">
+                        <div class="profileImg">
+                            <div class="outterProImg">
+                                <% if (embed) { %>
+                                    <img src="<%= embed %>" style="border-radius: 50%; width: 178px; height: 178px; border: 2px solid black; object-fit: cover;">
+                                <% } else { %>
+                                    <img src="/icons/StarPlace-Logo-1.png" style="border-radius: 50%; width: 178px; height: 178px; border: 2px solid black; object-fit: cover;">
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="usernamePos">
+                            <h1 style="margin-bottom: 2px;"><%= userpage %></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-container">
+        <% if (starboards.length) { %>
+            <div class="gridz">
+                <% for (const starboard of starboards) { %>
+                    <div onclick="location.href='/star/<%= starboard.link %>'">
+                        <div class="slot">
+                            <div class="cover-art">
+                                <img class="cover-img" src="<%= starboard.cover %>">
+                            </div>
+                            <div class="track-descriptors">
+                                <div class="track-desc">
+                                    <div class="track-name"><%= starboard.name %></div>
+                                    <div class="track-owner"><%= starboard.uploader %></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <% } else { %>
+                <h4><%= userpage %> hasn't joined anywhere... yet!</h4>
+            <% } %>
+    </div>
+</body>
+</html>

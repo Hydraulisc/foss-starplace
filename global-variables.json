@@ -1,0 +1,15 @@
+{
+  "hostPort": 8000,
+  "sessionKey": "test_session_key",
+  "protocol": "https",
+  "siteDomain": "starplace.hydraulisc.net",
+  "title": "StarPlace",
+  "logoURL": "/icons/StarPlace-Logo-1.png",
+  "bannerURL": "/icons/StarPlace-Banner-2.jpg",
+  "shortDescription": "StarPlace is a Free and Open Source forum social network where users share content. This instance is <a target=\"_blank\" href=\"https://about.hydraulisc.net\" style=\"color: #8086d4;\">Powered by Hydraulisc</a>.",
+  "kofiURL": "https://ko-fi.com/supportkofi",
+  "hydrauliscAuth": false,
+  "hydrauliscCallback": "http://127.0.0.1:8000/oauth/callback",
+  "hydrauliscAuthClient": null,
+  "hydrauliscAuthToken": null
+}

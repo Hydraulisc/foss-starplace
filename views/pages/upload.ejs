@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarPlace | Unleashing Stellar Creativity</title>
+    <meta property="og:title" content="Unleashing Stellar Creativity - StarPlace">
+    <meta property="og:description" content="Unleashing Stellar Creativity | StarPlace">
+    <meta property="og:image" content="/icons/StarPlace-Logo-1.png">
+    <link rel="canonical" href="https://about:blank">
+    <link rel="alternate" media="handheld" href="https://about:blank">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://about:blank">
+    <link rel="icon" type="image/png" href="/icons/StarPlace-Logo-1.png">
+    <meta name="description" content="Unleash your Stellar Creativity, with StarPlace - where communities come together!">
+    <meta property="og:site_name" content="Unleashing Stellar Creativity - StarPlace">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/cookies') %>
+    <%- include('../partials/header', { username: username }) %>
+      
+    <div>
+        <h3>This is where you can upload your own track to Fire 🔥!</h3>
+        <p>Simply fill in the form below (if you are logged in) and press upload! Your track and it's cover image will be stored on our servers and served to the public!</p>
+        <b style="color: red;">Don't forget to read our <a style="color: crimson;" href="">Content Policy</a> and make sure you are abiding our <a style="color: crimson;" href="">ToS</a></b>
+    </div>
+    <br>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div>
+          <label for="name">Track Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="file">Track File (The Audio File)</label>
+          <input type="file" id="file" name="file" accept="audio/*" required>
+        </div>
+        <div>
+          <label for="cover">Track Cover</label>
+          <input type="file" id="cover" name="cover" accept="image/*" required>
+        </div>
+        <button type="submit">Upload</button>
+      </form>
+      
+          
+</body>
+</html>

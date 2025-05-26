@@ -1,0 +1,31 @@
+{
+  "name": "foss-starplace",
+  "version": "1.0.0",
+  "description": "A thread-board where users hunt for the stars",
+  "homepage": "https://github.com/Hydraulisc/foss-starplace#readme",
+  "bugs": {
+    "url": "https://github.com/Hydraulisc/foss-starplace/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hydraulisc/foss-starplace.git"
+  },
+  "license": "AGPL-3.0-or-later",
+  "author": "The Hydraulisc Dev Team",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "nodemon": "^3.1.9",
+    "querystring": "^0.2.1",
+    "sqlite3": "^5.1.7"
+  }
+}
