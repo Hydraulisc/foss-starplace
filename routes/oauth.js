@@ -2,7 +2,11 @@ const express = require('express');
 const axios = require('axios');
 const qs = require('querystring');
 const fs = require('fs');
+const crypto = require('crypto');
+const sqlite3 = require('sqlite3').verbose();
 const globals = JSON.parse(fs.readFileSync('global-variables.json', 'utf8'));
+
+const db = new sqlite3.Database('./database.db');
 
 const router = express.Router();
 
@@ -36,32 +40,94 @@ router.get('/callback', async (req, res) => {
   }
 });
 
+/*
+    At this point, I forgot what the fuck I was doing with this endpoint
+    @SleepingAmi#0001
+    30/5/25
+*/
 router.get('/me', async (req, res) => {
     const accessToken = req.session.accessToken;
-    if (!accessToken) return res.redirect('/?utm=oautherror');
-    try {
-    const userRes = await axios.get('https://hydraulisc.net/oauth/userinfo', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+if (!accessToken) return res.redirect('/?utm=oautherror');
+
+try {
+  const userRes = await axios.get('https://hydraulisc.net/oauth/userinfo', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+
+  const user = userRes.data;
+
+  // Check if user already exists
+  db.get(
+    'SELECT id, username, isAdmin, language FROM users WHERE hydraulisc_id = ?',
+    [user.id],
+    (err, existingUser) => {
+      if (err) return res.status(500).send(`Database error: ${err}`);
+
+      if (existingUser) {
+        // User already exists, just log them in
+        req.session.user = {
+          id: existingUser.id,
+          username: existingUser.username,
+          isAdmin: existingUser.isAdmin,
+          language: existingUser.language,
+        };
+        return req.session.save((err) => {
+          if (err) {
+            console.error('Session error:', err);
+            return res.redirect('/login');
+          }
+          return res.redirect('/?utm_src=oauth'); // Already exists
+        });
       }
-    });
 
-    const user = userRes.data;
+      // User does not exist, create them
+      db.run(
+        'INSERT INTO users (hydraulisc_id, username, password, pfp, theme, biography, isAdmin, indexable, language, discriminator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          user.id,
+          user.username,
+          "OAuth2",
+          `https://hydraulisc.net${user.pfp}`,
+          'default',
+          user.biography,
+          0,
+          1,
+          'english',
+          user.discriminator
+        ],
+        function (err) {
+          if (err) return res.status(500).send(`Registration error, ${err}`);
+          db.get(
+            'SELECT id, username, isAdmin, language FROM users WHERE id = ?',
+            [this.lastID],
+            (err, newUser) => {
+              if (err) return res.redirect('/login');
+              req.session.user = {
+                id: newUser.id,
+                username: newUser.username,
+                isAdmin: newUser.isAdmin,
+                language: newUser.language,
+              };
+              req.session.save((err) => {
+                if (err) {
+                  console.error('Session error:', err);
+                  return res.redirect('/login');
+                }
+                res.redirect('/?utm_src=oauth'); // New user created
+              });
+            }
+          );
+        }
+      );
+    }
+  );
+} catch (err) {
+  console.error('User info fetch failed:', err.response?.data || err.message);
+  res.status(500).send('Failed to fetch user info.');
+}
 
-    req.session.user = {
-      id: user.id,
-      username: user.username,
-      language: user.language || "english",
-      pfp: user.pfp,
-      discriminator: user.discriminator
-    };
-
-    res.status(200).redirect('/?utm_src=oauth');
-
-  } catch (err) {
-    console.error('User info fetch failed:', err.response?.data || err.message);
-    res.status(500).send('Failed to fetch user info.');
-  }
 })
 
 module.exports = router;

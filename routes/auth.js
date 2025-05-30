@@ -83,7 +83,7 @@ router.post('/register/:invite_code?', async (req, res) => {
                 [
                     sanitizedUsername.trim(),
                     hashedPassword,
-                    '/img/defaultpfp.png',
+                    '/icons/StarPlace-Logo-1.png',
                     'default',
                     'User has not written their Bio.',
                     isFirstUser ? 1 : 0,

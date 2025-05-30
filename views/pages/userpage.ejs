@@ -30,8 +30,8 @@
                     <div style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; margin-top: 0; margin-bottom: 40px; margin-right: 16px; margin-left: 16px;">
                         <div class="profileImg">
                             <div class="outterProImg">
-                                <% if (embed) { %>
-                                    <img src="<%= embed %>" style="border-radius: 50%; width: 178px; height: 178px; border: 2px solid black; object-fit: cover;">
+                                <% if (pfp) { %>
+                                    <img src="<%= pfp %>" style="border-radius: 50%; width: 128px; height: 128px; border: 2px solid black; object-fit: cover;">
                                 <% } else { %>
                                     <img src="/icons/StarPlace-Logo-1.png" style="border-radius: 50%; width: 178px; height: 178px; border: 2px solid black; object-fit: cover;">
                                 <% } %>
@@ -46,27 +46,26 @@
         </div>
     </div>
     <div class="app-container">
-        <% if (starboards.length) { %>
+        <!--
             <div class="gridz">
-                <% for (const starboard of starboards) { %>
-                    <div onclick="location.href='/star/<%= starboard.link %>'">
+                <for (const starboard of starboards)>
+                    <div onclick="location.href='/star/< starboard.link >'">
                         <div class="slot">
                             <div class="cover-art">
-                                <img class="cover-img" src="<%= starboard.cover %>">
+                                <img class="cover-img" src="< starboard.cover >">
                             </div>
                             <div class="track-descriptors">
                                 <div class="track-desc">
-                                    <div class="track-name"><%= starboard.name %></div>
-                                    <div class="track-owner"><%= starboard.uploader %></div>
+                                    <div class="track-name">< starboard.name ></div>
+                                    <div class="track-owner">< starboard.uploader ></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <% } %>
+                < } >
             </div>
-            <% } else { %>
-                <h4><%= userpage %> hasn't joined anywhere... yet!</h4>
-            <% } %>
+        -->
+        <h4><%= userpage %> hasn't joined anywhere... yet!</h4>
     </div>
 </body>
 </html>

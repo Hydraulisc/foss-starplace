@@ -4,6 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const { version } = require('./package.json');
 const legalRoutes = require('./routes/legal');
+const axios = require('axios');
 const fs = require('fs');
 const globals = JSON.parse(fs.readFileSync('global-variables.json', 'utf8'));
 const cookieParser = require('cookie-parser');
@@ -18,6 +19,7 @@ const initializeDatabase = () => {
         db.run(`
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                hydraulisc_id TEXT,
                 username TEXT NOT NULL,
                 password TEXT NOT NULL,
                 pfp TEXT NOT NULL,
@@ -150,6 +152,56 @@ app.get('/register', (req, res) => {
         logoURL: globals.logoURL,
         bannerURL: globals.bannerURL
     })
+})
+
+// Userpage
+app.get('/user/:userId?', (req, res) => {
+    db.get(
+        `SELECT hydraulisc_id, username, pfp, discriminator, biography FROM users WHERE id = ?`,
+        [req.params.userId],
+        (err, user) => {
+            if (err) {
+                console.error('Database error:', err);
+                return res.status(500).json({ error: 'Database error' });
+            }
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            if(!user.hydraulisc_id) {
+                res.render('pages/userpage', {
+                    userpage: user.username,
+                    username: req.session.user?.username || null,
+                    logoURL: globals.logoURL,
+                    title: globals.title,
+                    kofiURL: globals.kofiURL,
+                    pfp: user.pfp,
+                    uid: req.session.user?.id || null,
+                })
+            } else {
+                try {
+                    fetch(`https://hydraulisc.net/api/${user.hydraulisc_id}`)
+                        .then(res => {
+                            if (!res.ok) throw new Error('Failed to fetch foreign user data');
+                            return res.json();
+                        })
+                        .then(data => {
+                            res.render('pages/userpage', {
+                                userpage: `${data.user.username}#${data.user.discriminator}`,
+                                username: req.session.user?.username || null,
+                                logoURL: globals.logoURL,
+                                title: globals.title,
+                                kofiURL: globals.kofiURL,
+                                pfp: `https://hydraulisc.net${data.user.pfp}`,
+                                uid: req.session.user?.id || null,
+                            })
+                        })
+                } catch (err) {
+                    console.error('User info fetch failed:', err.response?.data || err.message);
+                    res.status(500).send('Failed to fetch user info.');
+                }
+            }
+        });
 })
 
 // Start server
