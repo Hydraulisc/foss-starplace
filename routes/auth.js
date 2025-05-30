@@ -21,8 +21,8 @@ async function isFirstUser() {
     });
 }
 
-router.post('/register/:inviteCode?', async (req, res) => {
-    const invite_code = req.params.inviteCode || req.body.inviteCode;
+router.post('/register/:invite_code?', async (req, res) => {
+    const invite_code = req.params.invite_code || req.body.invite_code;
     if (req.is('multipart/form-data')) {
         return res.status(400).json({ error: "Invalid content type" });
     } // error check
@@ -48,11 +48,11 @@ router.post('/register/:inviteCode?', async (req, res) => {
 
         // Invite code validation
         if (globals.inviteMode) {
-            if (!inviteCode) return res.status(400).send('Invite code is required');
+            if (!invite_code) return res.status(400).send('Invite code is required');
 
             const query = 'SELECT * FROM invites WHERE code = ? AND used = 0';
             const invite = await new Promise((resolve, reject) => {
-                db.get(query, [inviteCode], (err, row) => {
+                db.get(query, [invite_code], (err, row) => {
                     if (err) reject(err);
                     else resolve(row);
                 });
@@ -62,7 +62,7 @@ router.post('/register/:inviteCode?', async (req, res) => {
 
             // Mark invite as used
             await new Promise((resolve, reject) => {
-                db.run('UPDATE invites SET used = 1 WHERE code = ?', [inviteCode], function (err) {
+                db.run('UPDATE invites SET used = 1 WHERE code = ?', [invite_code], function (err) {
                     if (err) reject(err);
                     else resolve();
                 });
