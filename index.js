@@ -204,6 +204,20 @@ app.get('/user/:userId?', (req, res) => {
         });
 })
 
+app.get('/create', (req,res) => {
+    if(!req.session.user?.username) {
+        res.redirect('/login');
+    } else {
+        res.render('pages/create', {
+            logoURL: globals.logoURL,
+            title: globals.title,
+            kofiURL: globals.kofiURL,
+            uid: req.session.user?.id || null,
+            username: req.session.user?.username || null
+        }); 
+    }
+})
+
 // Start server
 const PORT = globals.hostPort || 3000;
 app.listen(PORT, () => {

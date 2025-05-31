@@ -10,12 +10,14 @@
                 <li class="nav_item">
                     <a href="/boards" title="StarBoards" class="nav_link">Places</a>
                 </li>
-                <li class="nav_item">
-                    <a href="/upload" title="Create Post" class="nav_link">Create Post</a>
-                </li>
-                <li class="nav_item">
-                    <a href="/create" title="Create StarBoard" class="nav_link">Create Place</a>
-                </li>
+                <% if(username) { %>
+                    <li class="nav_item">
+                        <a href="/create" title="Create StarBoard" class="nav_link">Create Place</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav_item"></li>
+                    <li class="nav_item"></li>
+                <% } %>
                 <li class="nav_item">
                     <a href="<%- kofiURL %>" title="Donate" class="nav_link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="1 0 24 20" fill="none" stroke="#d7d9e0">

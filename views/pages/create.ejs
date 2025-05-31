@@ -21,30 +21,28 @@
 </head>
 <body>
     <%- include('../partials/cookies') %>
-    <%- include('../partials/header', { username: username }) %>
+    <%- include('../partials/header', { username: username, logoURL, kofiURL, uid }) %>
       
-    <div>
-        <h3>This is where you can upload your own track to Fire 🔥!</h3>
-        <p>Simply fill in the form below (if you are logged in) and press upload! Your track and it's cover image will be stored on our servers and served to the public!</p>
-        <b style="color: red;">Don't forget to read our <a style="color: crimson;" href="">Content Policy</a> and make sure you are abiding our <a style="color: crimson;" href="">ToS</a></b>
-    </div>
-    <br>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <div class="upload_form_container">
+      <h3>Create a StarPlace</h3>
+      <p>Work in Progress!</p>
+      <br>
+      <form action="/api/create" method="POST" enctype="multipart/form-data">
         <div>
-          <label for="name">Track Name</label>
+          <label for="name">Place Name</label>
           <input type="text" id="name" name="name" required>
         </div>
         <div>
-          <label for="file">Track File (The Audio File)</label>
-          <input type="file" id="file" name="file" accept="audio/*" required>
+          <label for="name">A Short Place Description (optional)</label>
+          <input type="text" id="name" name="name" required>
         </div>
         <div>
-          <label for="cover">Track Cover</label>
-          <input type="file" id="cover" name="cover" accept="image/*" required>
+          <label for="name">A Place Image (optional)</label>
+          <input type="file" id="name" name="name" required>
         </div>
-        <button type="submit">Upload</button>
+        <button type="submit" style="margin-top: .4rem;">Publish</button>
       </form>
-      
-          
+      <b style="font-size: smaller;"><i>Don't forget to read our <a style="color: #ffd05a; text-decoration: underline;" href="">Content Policy</a> and make sure you are abiding our <a style="color: #ffd05a; text-decoration: underline;" href="">ToS</a></i></b>
+    </div>
 </body>
 </html>
