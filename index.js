@@ -155,53 +155,73 @@ app.get('/register', (req, res) => {
 })
 
 // Userpage
-app.get('/user/:userId?', (req, res) => {
+app.get('/user/:userId?', async (req, res) => {
+  try {
+    const userId = req.params.userId;
     db.get(
-        `SELECT hydraulisc_id, username, pfp, discriminator, biography FROM users WHERE id = ?`,
-        [req.params.userId],
-        (err, user) => {
-            if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({ error: 'Database error' });
-            }
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
+      `SELECT hydraulisc_id, username, pfp, discriminator, biography FROM users WHERE id = ?`,
+      [userId],
+      async (err, user) => {
+        if (err) {
+          console.error('Database error:', err);
+          return res.status(500).json({ error: 'Database error' });
+        }
+        if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+        }
 
-            if(!user.hydraulisc_id) {
-                res.render('pages/userpage', {
-                    userpage: user.username,
-                    username: req.session.user?.username || null,
-                    logoURL: globals.logoURL,
-                    title: globals.title,
-                    kofiURL: globals.kofiURL,
-                    pfp: user.pfp,
-                    uid: req.session.user?.id || null,
-                })
-            } else {
-                try {
-                    fetch(`https://hydraulisc.net/api/${user.hydraulisc_id}`)
-                        .then(res => {
-                            if (!res.ok) throw new Error('Failed to fetch foreign user data');
-                            return res.json();
-                        })
-                        .then(data => {
-                            res.render('pages/userpage', {
-                                userpage: `${data.user.username}#${data.user.discriminator}`,
-                                username: req.session.user?.username || null,
-                                logoURL: globals.logoURL,
-                                title: globals.title,
-                                kofiURL: globals.kofiURL,
-                                pfp: `https://hydraulisc.net${data.user.pfp}`,
-                                uid: req.session.user?.id || null,
-                            })
-                        })
-                } catch (err) {
-                    console.error('User info fetch failed:', err.response?.data || err.message);
-                    res.status(500).send('Failed to fetch user info.');
-                }
-            }
-        });
+        // Local user
+        if (!user.hydraulisc_id) {
+          return res.render('pages/userpage', {
+            userpage: user.username,
+            username: req.session.user?.username || null,
+            logoURL: globals.logoURL,
+            title: globals.title,
+            kofiURL: globals.kofiURL,
+            pfp: user.pfp,
+            uid: req.session.user?.id || null,
+            foreignUser: false
+          });
+        }
+
+        // Foreign user (OAuth2-based)
+        try {
+          const foreignRes = await fetch(`https://hydraulisc.net/api/${user.hydraulisc_id}`);
+          if (!foreignRes.ok) throw new Error('Failed to fetch foreign user data');
+          const data = await foreignRes.json();
+
+          return res.render('pages/userpage', {
+            userpage: `${data.user.username}#${data.user.discriminator}`,
+            username: req.session.user?.username || null,
+            logoURL: globals.logoURL,
+            title: globals.title,
+            kofiURL: globals.kofiURL,
+            pfp: `https://hydraulisc.net${data.user.pfp}`,
+            uid: req.session.user?.id || null,
+            foreignUser: true
+          });
+        } catch (fetchErr) {
+          console.error('User info fetch failed:', fetchErr.message);
+          return res.status(500).send('Failed to fetch foreign user info.');
+        }
+      }
+    );
+  } catch (outerErr) {
+    console.error('Unexpected error:', outerErr.message);
+    return res.status(500).send('Unexpected server error.');
+  }
+});
+
+// Display /boards
+app.get('/boards', async (req, res) => {
+    res.render('pages/starboards', {
+        username: req.session.user?.username || null,
+        logoURL: globals.logoURL,
+        title: globals.title,
+        kofiURL: globals.kofiURL,
+        uid: req.session.user?.id || null,
+        boards: []
+    })
 })
 
 app.get('/create', (req,res) => {

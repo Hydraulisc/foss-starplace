@@ -8,6 +8,7 @@ img {
 
 .navbar_container {
     border-bottom: 1px solid rgb(20, 20, 20);
+    background-color: rgb(32, 32, 32) !important;
 }
 
 .navbar {

@@ -1,0 +1,11 @@
+.foreignUser_notice {
+    font-size: .8em;
+    padding: 16px;
+    border-left: 5px solid rgb(255, 79, 79);
+    background-color: dimgray;
+    color: inherit;
+    border-radius: 8px;
+    overflow: clip;
+    z-index: 1;
+    font-weight: 600;
+}

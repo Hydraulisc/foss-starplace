@@ -18,6 +18,7 @@
     <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
     <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/rootStyles.css">
 </head>
 <body>
     <%- include('../partials/cookies') %>
@@ -27,7 +28,7 @@
       <h3>Create a StarPlace</h3>
       <p>Work in Progress!</p>
       <br>
-      <form action="/api/create" method="POST" enctype="multipart/form-data">
+      <form action="/api/create-place" method="POST" enctype="multipart/form-data">
         <div>
           <label for="name">Place Name</label>
           <input type="text" id="name" name="name" required>
