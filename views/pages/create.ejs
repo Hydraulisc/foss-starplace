@@ -28,20 +28,16 @@
       <h3>Create a StarPlace</h3>
       <p>Work in Progress!</p>
       <br>
-      <form action="/api/create-place" method="POST" enctype="multipart/form-data">
+      <form action="/api/create-place" method="POST">
         <div>
           <label for="name">Place Name</label>
           <input type="text" id="name" name="name" required>
         </div>
         <div>
           <label for="name">A Short Place Description (optional)</label>
-          <input type="text" id="name" name="name" required>
+          <input type="text" id="description" name="description">
         </div>
-        <div>
-          <label for="name">A Place Image (optional)</label>
-          <input type="file" id="name" name="name" required>
-        </div>
-        <button type="submit" style="margin-top: .4rem;">Publish</button>
+        <button type="submit" style="margin-top: .4rem; width: 100%;">Publish</button>
       </form>
       <b style="font-size: smaller;"><i>Don't forget to read our <a style="color: #ffd05a; text-decoration: underline;" href="">Content Policy</a> and make sure you are abiding our <a style="color: #ffd05a; text-decoration: underline;" href="">ToS</a></i></b>
     </div>

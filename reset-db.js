@@ -44,7 +44,7 @@ const initializeDatabase = () => {
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 hydraulisc_id TEXT,
-                username TEXT NOT NULL,
+                username TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL,
                 pfp TEXT NOT NULL,
                 theme TEXT NOT NULL,
@@ -69,6 +69,7 @@ const initializeDatabase = () => {
             CREATE TABLE IF NOT EXISTS boards (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 name TEXT NOT NULL UNIQUE,
+                icon TEXT NOT NULL,
                 owner INTEGER NOT NULL,
                 description TEXT NOT NULL,
                 indexable BOOLEAN DEFAULT 0 NOT NULL,

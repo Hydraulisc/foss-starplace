@@ -87,7 +87,7 @@ try {
         'INSERT INTO users (hydraulisc_id, username, password, pfp, theme, biography, isAdmin, indexable, language, discriminator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           user.id,
-          user.username,
+          `${user.username}#${user.discriminator}`, // Added full username as displayed, including discriminator, to prevent UNIQUE constraint issues
           "OAuth2",
           `https://hydraulisc.net${user.pfp}`,
           'default',

@@ -33,13 +33,14 @@
                 <div class="boards_list">
                     <div class="boards">
                         <% for (const board of boards) { %>
-                            <div id="<%- board %>" class="board_container">
+                            <div class="board_container">
                                 <span>
-                                    <img src="<%- board %>" alt="">
+                                    <img src="<%- board.icon %>" alt="<%- board.name %>'s icon">
                                 </span>
                                 <div>
-                                    <a href="star/<%- board %>">star/<%- board %></a>
-                                    <p><%- board %></p>
+                                    <a href="star/<%- board %>">star/<%- board.name %></a>
+                                    <p><%- board.description %></p>
+                                    <p style="font-size: smaller;"><%- board.owner %></p>
                                 </div>
                             </div>
                         <% } %>

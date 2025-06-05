@@ -19,7 +19,7 @@ const initializeDatabase = () => {
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 hydraulisc_id TEXT,
-                username TEXT NOT NULL,
+                username TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL,
                 pfp TEXT NOT NULL,
                 theme TEXT NOT NULL,
@@ -44,6 +44,7 @@ const initializeDatabase = () => {
             CREATE TABLE IF NOT EXISTS boards (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 name TEXT NOT NULL UNIQUE,
+                icon TEXT NOT NULL,
                 owner INTEGER NOT NULL,
                 description TEXT NOT NULL,
                 indexable BOOLEAN DEFAULT 0 NOT NULL,
@@ -227,14 +228,31 @@ app.get('/user/:userId?', async (req, res) => {
 
 // Display /boards
 app.get('/boards', async (req, res) => {
-    res.render('pages/starboards', {
-        username: req.session.user?.username || null,
-        logoURL: globals.logoURL,
-        title: globals.title,
-        kofiURL: globals.kofiURL,
-        uid: req.session.user?.id || null,
-        boards: []
-    })
+    db.all(
+        `SELECT name, description, icon, indexable FROM boards LIMIT 15`,
+        (err, rows) => {
+            if (err) {
+                console.log(err);
+                return res.render('pages/starboards', {
+                    username: req.session.user?.username || null,
+                    logoURL: globals.logoURL,
+                    title: globals.title,
+                    kofiURL: globals.kofiURL,
+                    uid: req.session.user?.id || null,
+                    boards: {'name':'Internal Database Error'}
+                });
+            }
+
+            res.render('pages/starboards', {
+                username: req.session.user?.username || null,
+                logoURL: globals.logoURL,
+                title: globals.title,
+                kofiURL: globals.kofiURL,
+                uid: req.session.user?.id || null,
+                boards: rows
+            })
+        }
+    )
 })
 
 app.get('/create', (req,res) => {
