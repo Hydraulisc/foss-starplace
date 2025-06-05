@@ -2,3 +2,4 @@ database.db
 /node_modules
 /public/uploads
 .devdbrc
+/backups

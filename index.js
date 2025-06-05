@@ -4,7 +4,6 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const { version } = require('./package.json');
 const legalRoutes = require('./routes/legal');
-const axios = require('axios');
 const fs = require('fs');
 const globals = JSON.parse(fs.readFileSync('global-variables.json', 'utf8'));
 const cookieParser = require('cookie-parser');
@@ -26,7 +25,6 @@ const initializeDatabase = () => {
                 theme TEXT NOT NULL,
                 biography TEXT NOT NULL,
                 isAdmin BOOLEAN DEFAULT 0 NOT NULL,
-                indexable BOOLEAN DEFAULT 1 NOT NULL,
                 discriminator TEXT,
                 language TEXT NOT NULL
             )
@@ -41,17 +39,32 @@ const initializeDatabase = () => {
             )
         `);
 
+        // Create Boards table
+        db.run(`
+            CREATE TABLE IF NOT EXISTS boards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                name TEXT NOT NULL UNIQUE,
+                owner INTEGER NOT NULL,
+                description TEXT NOT NULL,
+                indexable BOOLEAN DEFAULT 0 NOT NULL,
+                language TEXT NOT NULL
+            )
+        `);
+
         // Create Posts table
-        // Ty sooox for helping with post db - @SleepingAmi
         db.run(`
             CREATE TABLE IF NOT EXISTS posts (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER NOT NULL,
+                board_id INTEGER NOT NULL,
                 title TEXT NOT NULL,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 filename TEXT NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
+                    ON DELETE CASCADE
+                    ON UPDATE CASCADE,
+                FOREIGN KEY (board_id) REFERENCES boards(id)
                     ON DELETE CASCADE
                     ON UPDATE CASCADE
             )

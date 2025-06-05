@@ -79,7 +79,7 @@ router.post('/register/:invite_code?', async (req, res) => {
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
             db.run(
-                'INSERT INTO users (username, password, pfp, theme, biography, isAdmin, indexable, language) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO users (username, password, pfp, theme, biography, isAdmin, language) VALUES (?, ?, ?, ?, ?, ?, ?)',
                 [
                     sanitizedUsername.trim(),
                     hashedPassword,
@@ -87,7 +87,6 @@ router.post('/register/:invite_code?', async (req, res) => {
                     'default',
                     'User has not written their Bio.',
                     isFirstUser ? 1 : 0,
-                    1,
                     'english'
                 ],
                 function (err) {

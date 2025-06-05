@@ -1,0 +1,80 @@
+.boards_container {
+    padding: 1rem;
+    max-width: 1400px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+.boards_header {
+    padding: 0;
+    margin: .4rem 0;
+}
+
+.boards_header h3 {
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-bottom: 1.5rem !important;
+}
+
+.boards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+    margin-bottom: 1.5rem;
+    max-width: 1400px;
+}
+
+.boards_list {
+    margin: 0 auto;
+}
+
+.board_container {
+    padding: .7em 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.board_container span {
+    padding-left: .5em;
+    padding-right: .5em;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.board_container span img {
+    width: 24px;
+    height: 24px;
+}
+
+.board_container div {
+    align-items: flex-start;
+    flex-direction: column;
+    display: flex;
+    flex-grow: 1;
+}
+
+.board_container div a {
+    color: #ffd05a;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: -12px;
+}
+
+.board_container div a:hover {
+    color: yellow;
+    text-decoration: underline;
+}
+
+.board_container div p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 0px;
+}

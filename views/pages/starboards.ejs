@@ -17,62 +17,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
     <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/rootStyles.css">
+    <link rel="stylesheet" href="/css/boardStyles.css">
 </head>
 <body>
     <%- include('../partials/cookies') %>
     <div id="root">
         <div class="app_container">
             <%- include('../partials/header', { username: username, uid: uid }) %>
-            <div class="gridz">
-                <div class="home_container">
-                    <h3>Work In Progress</h3>
-                    <div class="container_container">
-                        <main class="landing_feat">
-                            <div>
-                                <% for (const post of boards) { %>
-                                    <br class="separator">
-                                    <div id="<%- post.path %>" class="star_post_container">
-                                        <a style="inset: 0; position: absolute;  text-decoration: none; color: white;" href="/star/<%- post.starplace %>/a"></a>
-                                        <div>
-                                            <span class="star_post_header_container">
-                                                <span class="star_post_header">
-                                                    <span style="position: relative;">
-                                                        <span style="display: flex;">
-                                                            <div>
-                                                                <div>
-                                                                    <a href="/star/<%- post.starplace %>" class="star_post_title">
-                                                                        <span>star/<%- post.starplace %></span>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                                <span class="join_star_button_container">
-                                                    <button class="join_star_button">Join</button>
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div style="display: flex;">
-                                            <div style="overflow: hidden; flex-grow: 1;">
-                                                <div class="star_post_entry"><%- post.name %></div>
-                                                <div class="star_post_body"><%- post.content %></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  <% } %>
+            <div class="boards_container">
+                <div class="boards_header">
+                    <h3>List of Public StarBoards</h3>
+                </div>
+            </div>
+                <div class="boards_list">
+                    <div class="boards">
+                        <% for (const board of boards) { %>
+                            <div id="<%- board %>" class="board_container">
+                                <span>
+                                    <img src="<%- board %>" alt="">
+                                </span>
+                                <div>
+                                    <a href="star/<%- board %>">star/<%- board %></a>
+                                    <p><%- board %></p>
+                                </div>
                             </div>
-                        </main>
-                        <div class="recommend-starboard">
-                            <section class="starboard12"></section>
-                        </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- hi -->
 </body>

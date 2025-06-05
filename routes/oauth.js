@@ -11,13 +11,13 @@ const db = new sqlite3.Database('./database.db');
 const router = express.Router();
 
 router.get('/login', (req, res) => {
-    res.redirect(`https://hydraulisc.net/oauth/authorize?client_id=${globals.hydrauliscAuthClient}&redirect_uri=${globals.hydrauliscCallback}&response_type=code`)
+    res.redirect(`${globals.hydrauliscAuthUrl}/authorize?client_id=${globals.hydrauliscAuthClient}&redirect_uri=${globals.hydrauliscCallback}&response_type=code`)
 })
 
 router.get('/callback', async (req, res) => {
     const { code } = req.query;
     try {
-    const tokenRes = await axios.post('https://hydraulisc.net/oauth/token', qs.stringify({
+    const tokenRes = await axios.post(`${globals.hydrauliscAuthUrl}/token`, qs.stringify({
       code,
       client_id: globals.hydrauliscAuthClient,
       client_secret: globals.hydrauliscAuthToken,
@@ -50,7 +50,7 @@ router.get('/me', async (req, res) => {
 if (!accessToken) return res.redirect('/?utm=oautherror');
 
 try {
-  const userRes = await axios.get('https://hydraulisc.net/oauth/userinfo', {
+  const userRes = await axios.get(`${globals.hydrauliscAuthUrl}/userinfo`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
     }

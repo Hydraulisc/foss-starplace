@@ -9,6 +9,7 @@
   "shortDescription": "StarPlace is a Free and Open Source forum social network where users share content. This instance is <a target=\"_blank\" href=\"https://about.hydraulisc.net\" style=\"color: #8086d4;\">Powered by Hydraulisc</a>.",
   "kofiURL": "https://ko-fi.com/supportkofi",
   "hydrauliscAuth": false,
+  "hydrauliscAuthUrl": "https://hydraulisc.net/oauth",
   "hydrauliscCallback": "http://127.0.0.1:8000/oauth/callback",
   "hydrauliscAuthClient": null,
   "hydrauliscAuthToken": null
