@@ -50,7 +50,6 @@ const initializeDatabase = () => {
                 theme TEXT NOT NULL,
                 biography TEXT NOT NULL,
                 isAdmin BOOLEAN DEFAULT 0 NOT NULL,
-                discriminator TEXT,
                 language TEXT NOT NULL
             )
         `);

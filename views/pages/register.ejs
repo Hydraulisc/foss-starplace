@@ -68,12 +68,18 @@
                                                     <div class="content_nav">
                                                         <div class="content_navigations" role="group">
                                                             <input class="content_nav_btn" id="input-landing-posts-all" type="radio">
-                                                            <label for="input-landing-posts-all" class="content_nav_btn_label" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;">Starred</label>
+                                                            <label for="input-landing-posts-all" class="content_nav_btn_label" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; color: #3d3d3d92;">Starred</label>
                                                             <input class="content_nav_btn active" id="input-landing-posts-subbed" type="radio" checked>
                                                             <label for="input-landing-posts-subbed" class="content_nav_btn_label active" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;">All</label>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <% if (posts.length) { %>
+                                                    <div class="starpost_listing">
+                                                        <p></p>
+                                                    </div>
+                                                    <hr style="opacity: 0.2;">
+                                                <% } else { %>
                                                     <div class="starpost_listing">
                                                         <div class="starpost_content_container">
                                                             <article class="row">
@@ -236,6 +242,7 @@
                                                         </div>
                                                     </div>
                                                     <hr style="opacity: 0.2;">
+                                                <% } %>
                                                 </div>
                                             </div>
                                     </main>

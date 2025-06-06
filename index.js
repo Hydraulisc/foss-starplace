@@ -25,7 +25,6 @@ const initializeDatabase = () => {
                 theme TEXT NOT NULL,
                 biography TEXT NOT NULL,
                 isAdmin BOOLEAN DEFAULT 0 NOT NULL,
-                discriminator TEXT,
                 language TEXT NOT NULL
             )
         `);
@@ -159,13 +158,22 @@ app.get('/login', (req, res) => {
 
 // Register
 app.get('/register', (req, res) => {
-    res.render('pages/register', {
-        username: null,
-        uid: null,
-        title: globals.title,
-        logoURL: globals.logoURL,
-        bannerURL: globals.bannerURL
-    })
+    db.all(
+        `SELECT id, board_id, title, filename, FROM posts LIMIT 3`,
+        (err, rows) => {
+            if (err) {
+                console.log(err);
+                res.render('pages/register', {
+                    username: null,
+                    uid: null,
+                    title: globals.title,
+                    logoURL: globals.logoURL,
+                    bannerURL: globals.bannerURL,
+                    posts: rows || []
+                })
+            }
+        }
+    )
 })
 
 // Userpage
@@ -226,8 +234,8 @@ app.get('/user/:userId?', async (req, res) => {
   }
 });
 
-// Display /boards
-app.get('/boards', async (req, res) => {
+// Display /places
+app.get('/places', async (req, res) => {
     db.all(
         `SELECT name, description, icon, indexable FROM boards LIMIT 15`,
         (err, rows) => {
