@@ -32,16 +32,22 @@
             </div>
                 <div class="boards_list">
                     <div class="boards">
-                        <% for (const board of boards) { %>
-                            <div class="board_container">
-                                <span>
-                                    <img src="<%- board.icon %>" alt="<%- board.name %>'s icon">
-                                </span>
-                                <div>
-                                    <a href="star/<%- board.name %>">star/<%- board.name %></a>
-                                    <p><%- board.description %></p>
-                                    <p style="font-size: smaller;"><%- board.owner %></p>
+                        <% if (boards.length) { %>
+                            <% for (const board of boards) { %>
+                                <div class="board_container">
+                                    <span>
+                                        <img src="<%- board.icon %>" alt="<%- board.name %>'s icon">
+                                    </span>
+                                    <div>
+                                        <a href="star/<%- board.name %>">star/<%- board.name %></a>
+                                        <p><%- board.description %></p>
+                                        <p style="font-size: smaller;"><%- board.owner %></p>
+                                    </div>
                                 </div>
+                            <% } %>
+                        <% } else { %>
+                            <div class="board_container">
+                                <h3>It's a bit empty in here.</h3>
                             </div>
                         <% } %>
                     </div>
