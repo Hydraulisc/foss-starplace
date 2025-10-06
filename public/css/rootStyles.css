@@ -40,7 +40,7 @@ h1, h2, h3, h4 {
     text-transform: uppercase;
     padding: 20px 31px;
     border-radius: 6px;
-    color: lightcoral;
+    color: #3d3d3d;
     background: linear-gradient(45deg, #ffd05a, #ffdd7c);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;

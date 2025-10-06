@@ -25,7 +25,8 @@ const initializeDatabase = () => {
                 theme TEXT NOT NULL,
                 biography TEXT NOT NULL,
                 isAdmin BOOLEAN DEFAULT 0 NOT NULL,
-                language TEXT NOT NULL
+                language TEXT NOT NULL,
+                discriminator TEXT
             )
         `);
 
@@ -275,6 +276,18 @@ app.get('/create', (req,res) => {
             username: req.session.user?.username || null
         }); 
     }
+})
+
+// STARBOARDS
+app.get('/star/:place?', async (req, res) => {
+    if(!req.params.place) return res.render('pages/404');
+    res.render('pages/place', {
+        logoURL: globals.logoURL,
+        title: globals.title,
+        kofiURL: globals.kofiURL,
+        uid: req.session.user?.id || null,
+        username: req.session.user?.username || null
+    })
 })
 
 // Start server
