@@ -3,14 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <% if(!placeTitle) { %>
+        <title>Not Found</title>
+    <% } else { %>
+        <title><%- placeTitle %></title>
+    <% } %>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('../partials/noscript') %>
     <%- include('../partials/cookies') %>
     <%- include('../partials/header', { kofiURL, logoURL, title, username: username, uid: uid }) %>
     <div style="width: 30%; margin-left:auto; margin-right: auto;">
-        <h1 style="font-size: 64px; text-decoration: underline;">🚧 Under Construction 🚧</h1>
+        <h1 style="font-size: 64px; text-decoration: underline;"><%- placeTitle %></h1>
+        <div>
+            <% for (const post of posts) { %>
+                <div id="<%- post.id %>" style="border: 1px solid yellow; border-radius: 4px; min-height: 32px; padding: 6px; margin-bottom: 2em;">
+                    <div>
+                        <div>
+                            <svg width="32" height="32">
+                                <foreignObject x="0" y="0" width="32" height="32">
+                                    <img src="<%- post.user.pfp %>" style="width: 100%; border-radius: 50%; object-fit: cover;">
+                                </foreignObject>
+                            </svg>
+                        </div>
+                        <div>
+                            <span>
+                                <span class="author">
+                                    <%- post.user.username %>
+                                </span>
+                            </span>
+                            <div class="content">
+                                <p><%- post.content %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            <% } %>
+        </div>
     </div>
 </body>
 </html>

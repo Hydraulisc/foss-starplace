@@ -329,3 +329,10 @@ a::after, a::before {
   margin-top: 3rem;
   text-align: center;
 }
+
+.author {
+  position: relative;
+  min-width: 0px;
+  display: flex;
+  flex-grow: 1;
+}
