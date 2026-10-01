@@ -26,12 +26,16 @@
       
     <div class="upload_form_container">
       <h3>Create a StarPlace</h3>
-      <p>Work in Progress!</p>
+      <p><i>Work in Progress!</i></p>
       <br>
       <form action="/api/create-place" method="POST">
         <div>
           <label for="name">Place Name</label>
           <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="name">Display Name</label>
+          <input type="text" id="showname" name="showname" required>
         </div>
         <div>
           <label for="name">A Short Place Description (optional)</label>

@@ -8,38 +8,69 @@
     <% } else { %>
         <title><%- placeTitle %></title>
     <% } %>
+    <meta property="og:title" content="Unleashing Stellar Creativity - StarPlace">
+    <meta property="og:description" content="Unleashing Stellar Creativity | StarPlace">
+    <meta property="og:image" content="/icons/StarPlace-Logo-1.png">
+    <link rel="canonical" href="https://about:blank">
+    <link rel="alternate" media="handheld" href="https://about:blank">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://about:blank">
+    <link rel="icon" type="image/png" href="/icons/StarPlace-Logo-1.png">
+    <meta name="description" content="Unleash your Stellar Creativity, with StarPlace - where communities come together!">
+    <meta property="og:site_name" content="Unleashing Stellar Creativity - StarPlace">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="/css/indexStyles.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('../partials/noscript') %>
     <%- include('../partials/cookies') %>
     <%- include('../partials/header', { kofiURL, logoURL, title, username: username, uid: uid }) %>
-    <div style="width: 30%; margin-left:auto; margin-right: auto;">
-        <h1 style="font-size: 64px; text-decoration: underline;"><%- placeTitle %></h1>
-        <div>
-            <% for (const post of posts) { %>
-                <div id="<%- post.id %>" style="border: 1px solid yellow; border-radius: 4px; min-height: 32px; padding: 6px; margin-bottom: 2em;">
-                    <div>
-                        <div>
-                            <svg width="32" height="32">
-                                <foreignObject x="0" y="0" width="32" height="32">
-                                    <img src="<%- post.user.pfp %>" style="width: 100%; border-radius: 50%; object-fit: cover;">
-                                </foreignObject>
-                            </svg>
-                        </div>
-                        <div>
-                            <span>
-                                <span class="author">
-                                    <%- post.user.username %>
-                                </span>
-                            </span>
-                            <div class="content">
-                                <p><%- post.content %></p>
+    <div class="app">
+        <div tabindex="-1">
+            <div class="home_container">
+                <div class="row">
+                    <main class="starboards_container" role="main">
+                        <div class="main_content_wrapper">
+                            <div>
+                                <div class="content_navigation_container"><%- placeTitle %></div>
+                                    <% for (const post of posts) { %>
+                                        <div class="starpost_listing">
+                                            <div id="<%- post.id %>" class="starpost_content_container">
+                                                <article class="row">
+                                                    <div class="starpost_rating"></div>
+                                                    <div class="starpost_content">
+                                                        <div class="row">
+                                                            <div class="starpost_image_preview">
+                                                                <div>
+                                                                    <button class="starpost_image_thumbnail">
+                                                                        <img src="<%- post.user.pfp %>" class="image_thumbnail">
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="starpost_content_text">
+                                                                <div class="starpost_title">
+                                                                    <h1>
+                                                                        <a href="<%- post.link %>" style="color: white;"><%- post.content %></a>
+                                                                    </h1>
+                                                                </div>
+                                                                <div class="starpost_details">
+                                                                    <a href="<%- post.user.link %>"><%- post.user.username %></a> to <a href="<%- placeSource %>"><%- placeTitle %></a> · <span style="text-transform: capitalize;"><%- post.upload %></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>            
+                                        </div>
+                                        <hr style="opacity: 0.2;">
+                                    <% } %>
                             </div>
                         </div>
-                    </div>
-                </div>            
-            <% } %>
+                    </main>
+                </div>
+            </div>
         </div>
     </div>
 </body>

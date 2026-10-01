@@ -1,6 +1,8 @@
-# StarPlace <img src="/public/icons/StarPlace-Logo-1.png" style="width: 24px; height: 24px;" width="24px" height="24px">
+# StarPlace <img src="/public/icons/StarPlace-Logo-2.png" style="width: 24px; height: 24px;" width="24px" height="24px">
 
-**StarPlace**, inspired by the StarFly SMP. Powered by [Hydraulisc](https://about.hydraulisc.net).
+**StarPlace**, inspired by the StarFly SMP. [Powered by Hydraulisc](https://about.hydraulisc.net).
+
+![image](/public/icons/1000044731.png)
 
  
 ### What's Here?

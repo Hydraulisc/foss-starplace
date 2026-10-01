@@ -268,7 +268,7 @@ app.get('/create', (req,res) => {
     if(!req.session.user?.username) {
         res.redirect('/login');
     } else {
-        res.render('pages/create', {
+        res.render('pages/createPlace', {
             logoURL: globals.logoURL,
             title: globals.title,
             kofiURL: globals.kofiURL,
@@ -287,8 +287,9 @@ app.get('/star/:place?', async (req, res) => {
         kofiURL: globals.kofiURL,
         uid: req.session.user?.id || null,
         username: req.session.user?.username || null,
-        posts: [{ id: "message_1", "user": {"username": "Aquio", "pfp": "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/palette/circles/latte_red.png"}, content: "thuis is so stupid welñcome to hell doomslayer xd test 123 whgats cpookin and...... kiss my assthuis is so stupid welñcome to hell doomslayer xd test 123 whgats cpookin and...... kiss my ass", unread: false }, { id: "message_2", "user": {"username": "Aquio", "pfp": "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/palette/circles/latte_blue.png"}, content: "then dummy test messages work", unread: false }, { id: "message_3", "user": {"username": "Aquio", "pfp": "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/palette/circles/latte_yellow.png"}, content: "these messages are in reverse", unread: true }],
-        placeTitle: req.params.place || null 
+        posts: [{ id: "message_1", "user": {"username": "Aquio", "pfp": "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/palette/circles/latte_red.png"}, content: "this is so stupid welcome to hell doomslayer xd test 123 whats cookin and... kiss my ass", upload: "1 day ago" }, { id: "message_2", "user": {"username": "Flowing Water", "pfp": "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/palette/circles/latte_blue.png"}, content: "then dummy test messages work", upload: "2 days ago" }, { id: "message_3", "user": {"username": "Aquio", "pfp": "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/palette/circles/latte_yellow.png"}, content: "these posts are in the correct order now", upload: "a long time ago" }],
+        placeTitle: req.params.place || null,
+        placeSource: `/star/${req.params.place}`
     })
 })
 
